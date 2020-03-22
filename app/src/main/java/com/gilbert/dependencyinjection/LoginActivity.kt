@@ -12,16 +12,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val loginService = Retrofit.Builder()
-            .baseUrl("http://github.com")
-            .build()
-            .create(LoginService::class.java)
 
-        //create dependency
-        val localDataSource = UserLocalDataSource()
-        val remoteDataSource = UserRemoteDataSource(loginService)
-
-        val userRepository = UserRepository(localDataSource, remoteDataSource)
+        val userRepository = (application as MyApplication)
+            .appContainer
+            .userRepository
 
         loginViewModel = LoginViewModel(userRepository)
 
