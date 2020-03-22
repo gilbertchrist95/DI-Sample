@@ -13,6 +13,8 @@ class AppContainer {
     private val localDataSource = UserLocalDataSource()
     private val remoteDataSource = UserRemoteDataSource(loginService)
 
-    val userRepository = UserRepository(localDataSource, remoteDataSource)
+    private val userRepository = UserRepository(localDataSource, remoteDataSource)
+
+    val loginViewModelFactory = LoginViewModelFactory(userRepository)
 
 }

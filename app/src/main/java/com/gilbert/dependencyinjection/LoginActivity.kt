@@ -2,7 +2,6 @@ package com.gilbert.dependencyinjection
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import retrofit2.Retrofit
 
 class LoginActivity : AppCompatActivity() {
 
@@ -13,11 +12,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val userRepository = (application as MyApplication)
-            .appContainer
-            .userRepository
+        val appContainer = (application as MyApplication).appContainer
 
-        loginViewModel = LoginViewModel(userRepository)
+        loginViewModel = appContainer.loginViewModelFactory.create(LoginViewModel::class.java)
 
     }
 }
